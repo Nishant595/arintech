@@ -14,7 +14,7 @@ pipeline{
        	  }
         stage ('Download Java Code'){
             steps{
-              git branch: 'main', credentialsId: 'git-repo-creds', url: 'git@github.com:Nishant595/arintech.git'  
+              git branch: 'main', credentialsId: 'testing', url: 'git@github.com:Nishant595/arintech.git'
           }
         }
       }
