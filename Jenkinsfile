@@ -6,11 +6,12 @@ pipeline{
                 cleanWs()
             }
         }
-       stage('Second Stage'){
+       stage('Installing Maven'){
            steps {
-               echo "second stage"
+               sh 'sudo apt-get update -y && sudo apt-get upgrade -y'
+               sh 'sudo apt install -y wget tree unzip openjdk-11-jdk maven'
            }
-         }     
+       	  }
         stage ('Third stage'){
             steps{
                 echo "Third Stage"
@@ -18,3 +19,4 @@ pipeline{
         }
       }
   }
+
