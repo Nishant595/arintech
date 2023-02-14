@@ -12,6 +12,11 @@ pipeline{
                sh 'sudo apt install -y wget tree unzip openjdk-11-jdk maven'
            }
        	  }
+       stage('cloning code') {
+         steps {
+             git branch: 'main', url: 'https://github.com/Nishant595/arintech.git'
+           }
+         }
        stage('Compiling and Running Test Cases') {
           steps {
               sh 'mvn clean'
