@@ -12,10 +12,23 @@ pipeline{
                sh 'sudo apt install -y wget tree unzip openjdk-11-jdk maven'
            }
        	  }
-        stage ('Download Java Code'){
-            steps{
-              git branch: 'main', credentialsId: 'testing', url: 'git@github.com:Nishant595/arintech.git'
+       stage('Compiling and Running Test Cases') {
+          steps {
+              sh 'mvn clean'
+           	  sh 'mvn compile'
+              sh 'mvn test'
+              sh 'mvn package'
+       }
+        }
+      stage('Deploying Application') {
+        steps {
+          	   script{
+                     withEnv(['JENKINS_NODE_COOKIE=dontkill']) {
+                            sh 'nohup java -jar ./target/springboot-bootcamp-0.0.1-SNAPSHOT.jar &'
+                     }
+           	   }
+       }
+}
+
           }
         }
-      }
-  }
